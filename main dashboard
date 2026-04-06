@@ -1,0 +1,859 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const SmartPureApp());
+}
+
+class SmartPureApp extends StatelessWidget {
+  const SmartPureApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'SmartPure Home',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: 'Arial',
+      ),
+      home: const LoginScreen(),
+    );
+  }
+}
+
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF3F8DA8), Color(0xFF6BB7C9)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Card(
+              margin: const EdgeInsets.all(24),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(height: 10),
+                    const Text(
+                      "Welcome Back to",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    const Text(
+                      "SmartPure Home",
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: "Email Address",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: "Password",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DashboardScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text("Login"),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RegisterScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text("Don't have an account? Sign Up"),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Create Account")),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                labelText: "Full Name",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              decoration: InputDecoration(
+                labelText: "Email",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: "Password",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: "Confirm Password",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Text("Create Account"),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
+
+  Widget metricCard(IconData icon, String title, String value, String status) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [
+          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3))
+        ],
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 22,
+            backgroundColor: Colors.blue.shade50,
+            child: Icon(icon, color: Colors.blue),
+          ),
+          const SizedBox(width: 12),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title, style: const TextStyle(fontSize: 13)),
+              const SizedBox(height: 3),
+              Text(value,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16)),
+              Text(status,
+                  style: TextStyle(
+                      fontSize: 12, color: Colors.green.shade600)),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF2F5F7),
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.only(top: 60, bottom: 30),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF3F8DA8), Color(0xFF2F6F8A)],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
+              ),
+            ),
+            child: Column(
+              children: [
+                const Text(
+                  "SmartPure Home",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(height: 20),
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      height: 150,
+                      child: CircularProgressIndicator(
+                        value: 0.95,
+                        strokeWidth: 10,
+                        backgroundColor: Colors.white24,
+                        valueColor:
+                            const AlwaysStoppedAnimation(Colors.green),
+                      ),
+                    ),
+                    Column(
+                      children: const [
+                        Text("95%",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold)),
+                        Text("Green",
+                            style: TextStyle(
+                                color: Colors.greenAccent, fontSize: 16)),
+                      ],
+                    )
+                  ],
+                ),
+                const SizedBox(height: 10),
+                const Text("System Health",
+                    style: TextStyle(color: Colors.white70)),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 15),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(14),
+                boxShadow: const [
+                  BoxShadow(color: Colors.black12, blurRadius: 6)
+                ],
+              ),
+              child: Row(
+                children: const [
+                  Icon(Icons.warning_amber_rounded, color: Colors.orange),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                        "Water Quality Alert: Inlet turbidity spike detected."),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 1.6,
+                children: [
+                  metricCard(Icons.water_drop, "Turbidity", "0.5 NTU", "Excellent"),
+                  metricCard(Icons.science, "pH Level", "7.4", "Optimal"),
+                  metricCard(Icons.bar_chart, "TDS", "120 ppm", "Good"),
+                  metricCard(Icons.thermostat, "Temp", "18°C", "Cool"),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+     onTap: (index) {
+  if (index == 1) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const WaterQualityScreen()),
+    );
+  } else if (index == 2) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const FilterManagementScreen()),
+    );
+  } else if (index == 3) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const SettingsScreen()),
+    );
+  }
+},
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.water), label: "Water Quality"),
+          BottomNavigationBarItem(icon: Icon(Icons.filter_alt), label: "Filters"),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
+        ],
+      ),
+    );
+  }
+}
+
+class WaterQualityScreen extends StatefulWidget {
+  const WaterQualityScreen({super.key});
+
+  @override
+  State<WaterQualityScreen> createState() => _WaterQualityScreenState();
+}
+
+class _WaterQualityScreenState extends State<WaterQualityScreen> {
+  bool historical = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF2F5F7),
+      appBar: AppBar(
+        title: const Text("Water Quality Detail"),
+        backgroundColor: const Color(0xFF3F8DA8),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: const [
+                  BoxShadow(color: Colors.black12, blurRadius: 6)
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("Turbidity Analysis",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 20),
+                  Container(
+                    height: 180,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.blue.shade50,
+                    ),
+                    child: const Center(
+                        child: Text("Chart Area (Use fl_chart package)")),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Historical Data",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                  Switch(
+                    value: historical,
+                    onChanged: (value) {
+                      setState(() {
+                        historical = value;
+                      });
+                    },
+                  )
+                ],
+              ),
+            ),
+
+            const Spacer(),
+
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  backgroundColor: const Color(0xFF3F8DA8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                onPressed: () {},
+                child: const Text("Sensor Calibration"),
+              ),
+            )
+          ],
+        ),
+      ),
+      
+    );
+    
+  }
+
+}
+
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  bool notifications = true;
+  bool alertSound = false;
+  bool autoCalibrate = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF2F5F7),
+      appBar: AppBar(
+        title: const Text("Settings"),
+        backgroundColor: const Color(0xFF3F8DA8),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            const Text("Account",
+                style: TextStyle(fontSize: 13, color: Colors.grey, fontWeight:                 FontWeight.w600)),
+            const SizedBox(height: 8),
+            _settingsCard(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const CircleAvatar(
+                      backgroundColor: Color(0xFFE3F2FD),
+                      child: Icon(Icons.person, color: Color(0xFF3F8DA8)),
+                    ),
+                    title: const Text("John Doe", style: TextStyle(fontWeight:                         FontWeight.bold)),
+                    subtitle: const Text("johndoe@email.com"),
+                    trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            const Text("Notifications",
+                style: TextStyle(fontSize: 13, color: Colors.grey, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            _settingsCard(
+              child: Column(
+                children: [
+                  _toggleTile(
+                    icon: Icons.notifications_outlined,
+                    title: "Push Notifications",
+                    value: notifications,
+                    onChanged: (v) => setState(() => notifications = v),
+                  ),
+                  const Divider(height: 1),
+                  _toggleTile(
+                    icon: Icons.volume_up_outlined,
+                    title: "Alert Sound",
+                    value: alertSound,
+                    onChanged: (v) => setState(() => alertSound = v),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            const Text("Device",
+                style: TextStyle(fontSize: 13, color: Colors.grey, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            _settingsCard(
+              child: Column(
+                children: [
+                  _toggleTile(
+                    icon: Icons.tune,
+                    title: "Auto Calibration",
+                    value: autoCalibrate,
+                    onChanged: (v) => setState(() => autoCalibrate = v),
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const CircleAvatar(
+                      backgroundColor: Color(0xFFE3F2FD),
+                      child: Icon(Icons.wifi, color: Color(0xFF3F8DA8)),
+                    ),
+                    title: const Text("Device Connection"),
+                    subtitle: const Text("SmartPure-Unit-01  •  Connected",
+                        style: TextStyle(color: Colors.green, fontSize: 12)),
+                    trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                icon: const Icon(Icons.logout),
+                label: const Text("Log Out"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red.shade400,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginScreen()),
+                    (route) => false,
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _settingsCard({required Widget child}) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 6)],
+      ),
+      child: child,
+    );
+  }
+
+  Widget _toggleTile({
+    required IconData icon,
+    required String title,
+    required bool value,
+    required ValueChanged<bool> onChanged,
+  }) {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: const Color(0xFFE3F2FD),
+        child: Icon(icon, color: const Color(0xFF3F8DA8)),
+      ),
+      title: Text(title),
+      trailing: Switch(
+        value: value,
+        onChanged: onChanged,
+        activeColor: const Color(0xFF3F8DA8),
+      ),
+    );
+  }
+}
+
+class FilterManagementScreen extends StatefulWidget {
+  const FilterManagementScreen({super.key});
+
+  @override
+  State<FilterManagementScreen> createState() => _FilterManagementScreenState();
+}
+
+class _FilterManagementScreenState extends State<FilterManagementScreen> {
+  double sedimentLife = 0.85;
+  double carbonLife = 0.90;
+  double postLife = 0.92;
+
+  void _simulateUsage() {
+    setState(() {
+      if (sedimentLife > 0.05) sedimentLife -= 0.05;
+      if (carbonLife > 0.03) carbonLife -= 0.03;
+      if (postLife > 0.02) postLife -= 0.02;
+    });
+  }
+
+  void _handleOrder() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Order Confirmed"),
+        content: const Text("Your replacement cartridges are on the way! Would you like to reset the status?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              setState(() {
+                sedimentLife = 1.0;
+                carbonLife = 1.0;
+                postLife = 1.0;
+              });
+              Navigator.pop(context);
+            },
+            child: const Text("Reset Filters"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('Filter Management',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        backgroundColor: const Color(0xFF4A7DAB),
+        centerTitle: true,
+        elevation: 0,
+       leading: IconButton(
+  icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+  onPressed: () => Navigator.pop(context),
+),
+      ),
+      body: Column(
+        children: [
+          Container(
+            height: 20,
+            decoration: const BoxDecoration(
+              color: Color(0xFF4A7DAB),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(25),
+                bottomRight: Radius.circular(25),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              padding: const EdgeInsets.all(24.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withAlpha(20),
+                    blurRadius: 15,
+                    offset: const Offset(0, 5),
+                  )
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    children: [
+                      Icon(Icons.waves, color: Color(0xFF4A7DAB), size: 28),
+                      SizedBox(width: 10),
+                      Text('Cartridge Status',
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w800,
+                              color: Color(0xFF2D3142))),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  const Divider(thickness: 1, color: Color(0xFFECEFF1)),
+                  const SizedBox(height: 20),
+                  _buildFilterStatus("Sediment Filter", sedimentLife,
+                      "Estimated ${(sedimentLife * 8).toInt()} months left",
+                      const Color(0xFFF9A825), Icons.hourglass_bottom),
+                  const SizedBox(height: 30),
+                  _buildFilterStatus("Carbon Filter", carbonLife,
+                      "Estimated ${(carbonLife * 9).toInt()} months left",
+                      const Color(0xFF29B6F6), Icons.layers),
+                  const SizedBox(height: 30),
+                  _buildFilterStatus("Post-Filter", postLife,
+                      "Estimated ${(postLife * 9).toInt()} months left",
+                      const Color(0xFF66BB6A), Icons.verified_user),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          TextButton.icon(
+            onPressed: _simulateUsage,
+            icon: const Icon(Icons.opacity, color: Color(0xFF4A7DAB)),
+            label: const Text("Simulate Water Usage",
+                style: TextStyle(color: Color(0xFF4A7DAB))),
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 0, 30, 40),
+            child: SizedBox(
+              width: double.infinity,
+              height: 60,
+              child: ElevatedButton(
+                onPressed: _handleOrder,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF4A7DAB),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  elevation: 4,
+                ),
+                child: const Text('Order Replacements',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white)),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFilterStatus(String title, double percent, String description,
+      Color barColor, IconData icon) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(icon, size: 18, color: Colors.blueGrey),
+                const SizedBox(width: 8),
+                Text(title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Color(0xFF475569))),
+              ],
+            ),
+            Text("${(percent * 100).toInt()}%",
+                style: TextStyle(
+                    fontWeight: FontWeight.w900, fontSize: 16, color: barColor)),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Stack(
+          children: [
+            Container(
+              height: 10,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color(0xFFECEFF1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 600),
+              curve: Curves.easeOutCubic,
+              height: 10,
+              width: (MediaQuery.of(context).size.width - 88) * percent,
+              decoration: BoxDecoration(
+                color: barColor,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: barColor.withAlpha(80),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Text(description,
+            style: const TextStyle(
+                color: Colors.blueGrey,
+                fontSize: 13,
+                fontStyle: FontStyle.italic)),
+      ],
+    );
+  }
+}
+
