@@ -5,6 +5,7 @@
 * **Leader:** Hombre, Kurt Stephen G.
 * **Member:** Azores, Rachelle Ann P.
 * **Member:** Bermudez, Jamaica Mae D.
+* **Member:** Filio, Mary E.
 * **Member:** Medina, Lizet D.
 
 ---
