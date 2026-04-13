@@ -46,3 +46,5 @@ This project aims to provide safer drinking water for households, reduce health 
 * **Target Audience:** Designed for household and small-scale organizational use.
 * **Connectivity:** Requires a stable internet connection for real-time monitoring features.
 * **Testing:** Focuses on key monitoring parameters rather than comprehensive laboratory-grade testing.
+
+.
